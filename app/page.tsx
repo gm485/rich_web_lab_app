@@ -1,9 +1,12 @@
 import Image from 'next/image'
 // app/page.tsx
+
+import Image from 'next/image'
+
 export default function Home() {
   return (
     <section className="page">
-      <p className="eyebrow"></p>
+      <p className="eyebrow">Welcome to the app</p>
       <h1>Home</h1>
       <p className="description">
         
@@ -12,21 +15,6 @@ export default function Home() {
       <div className="card">
         <h2>Welcome!</h2>
         <p>Welcome to the app.</p>
-
-        <Image 
-          src="/beastie.png"
-          alt="BSD logo image, mascot of the BSD operating system"
-          width={200}
-          height={200}
-        />
-        <Image
-          src="https://tudublin12.b-cdn.net/tux.png"
-          alt="Next.js logo image"
-          width={200}
-          height={200}
-        />
-
-        
       </div>
      
 
