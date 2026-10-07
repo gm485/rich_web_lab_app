@@ -10,3 +10,4 @@ submissions and pdfs located in [`/docs`](./docs) directory
 
 |Task 2: 07/10/2026| [`task2.pdf`](./docs/task2.pdf) CDN setup and local public file management.
 
+-- To-do: encapsulate all variables pointing to outside sources for project
