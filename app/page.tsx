@@ -1,4 +1,3 @@
-import Image from 'next/image'
 // app/page.tsx
 
 import Image from 'next/image'
@@ -16,6 +15,19 @@ export default function Home() {
         <h2>Welcome!</h2>
         <p>Welcome to the app.</p>
       </div>
+
+      <Image 
+        src="https://tudublin12.b-cdn.net/tux.png"
+        alt="Hero Image"
+        width={200}
+        height={200}
+      />
+      <Image
+        src="/beastie.png"
+        alt="Hero Image 2"
+        width={200}
+        height={200}
+      />
      
 
     </section>
