@@ -1,15 +1,11 @@
-# Rich Web Applications - Labs
+# Developer Guide
 
-This is the sample Next.js app with a basic web app UI.
-
-## Run the app
-
-### Requirements
+## Requirements
 
 - Node.js and npm
 - A terminal opened in the project directory
 
-### Install dependencies
+## Install dependencies
 
 From the project root, run:
 
@@ -17,7 +13,7 @@ From the project root, run:
 npm i
 ```
 
-### Start the development server
+## Start the development server
 
 Run:
 
@@ -29,7 +25,7 @@ Open the local address printed in the terminal. By default, the app is available
 
 To stop the development server, press `Ctrl+C` in the terminal where it is running.
 
-### Other project commands
+## Other project commands
 
 ```bash
 npm run lint   # Check the code with ESLint
@@ -37,18 +33,9 @@ npm run build  # Build the app for production
 npm start      # Start the production build (run npm run build first)
 ```
 
-### Main pages
+## Main pages
 
 - `/` — Home
 - `/search` — Search
 - `/profile` — Profile
 - `/linus` — About Linus Torvalds
-
-## Lab Reports and Submissions
-submissions and pdfs located in [`/docs`](./docs) directory
-
-|Task 1: 29/9/2026| [`task1.pdf`](./docs/task1.pdf) Initial setup and codespace developement
-
-|Task 2: 07/10/2026| [`task2.pdf`](./docs/task2.pdf) CDN setup and local public file management.
-
--- To-do: encapsulate all variables pointing to outside sources for project

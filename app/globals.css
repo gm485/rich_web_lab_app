@@ -52,6 +52,48 @@ h1 {
   line-height: 1.5;
 }
 
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 10px 14px;
+  border: 1px solid #d8d8d8;
+  border-radius: 12px;
+  background: #e8e8e8;
+  color: #171717;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  background: #dedede;
+}
+
+.backButton:focus-visible {
+  outline: 2px solid #171717;
+  outline-offset: 2px;
+}
+
+.linusFigure {
+  margin: 0 0 20px;
+}
+
+.linusPortrait {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+}
+
+.linusFigure figcaption {
+  margin-top: 8px;
+  color: #555;
+  font-size: 13px;
+}
+
 .card {
   padding: 22px;
   background: white;
@@ -68,6 +110,18 @@ h1 {
 .card p {
   margin: 0;
   color: #777;
+  line-height: 1.6;
+}
+
+.infoCard {
+  margin-top: 16px;
+}
+
+.pageNote {
+  margin: 20px 2px 0;
+  color: #555;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .searchInput {
@@ -112,21 +166,33 @@ h1 {
   align-items: center;
   gap: 3px;
 
-  padding: 8px;
+  padding: 8px 4px;
   border-radius: 14px;
 
-  color: #666;
+  background: #e8e8e8;
+  color: #171717;
   font-size: 11px;
   font-weight: 600;
   text-decoration: none;
 }
 
-.bottomNav a:active {
+.bottomNav a:hover,
+.bottomNav a:focus-visible {
   background: #f0f0f0;
-  transform: scale(0.97);
+}
+
+.bottomNav a:focus-visible {
+  outline: 2px solid #171717;
+  outline-offset: 2px;
 }
 
 .bottomNav span {
   color: #171717;
   font-size: 22px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .bottomNav a {
+    transition: background-color 120ms ease;
+  }
 }
