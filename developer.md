@@ -13,6 +13,33 @@ From the project root, run:
 npm i
 ```
 
+## Install Skeleton for Next.js
+
+Skeleton's Next.js setup requires Next.js 15 or later, React 18 or later, and Tailwind CSS 4. This project already meets those requirements.
+
+Install Skeleton's core and React component packages from the project root:
+
+```bash
+npm i -D @skeletonlabs/skeleton @skeletonlabs/skeleton-react
+```
+
+At the top of `app/globals.css`, add the Skeleton imports after the Tailwind import and before the app's custom styles:
+
+```css
+@import 'tailwindcss';
+@import '@skeletonlabs/skeleton';
+@import '@skeletonlabs/skeleton-react';
+@import '@skeletonlabs/skeleton/themes/cerberus';
+```
+
+Set the active theme on the root HTML element in `app/layout.tsx`:
+
+```tsx
+<html lang="en" data-theme="cerberus">
+```
+
+Then start the app with `npm run dev` and open the local address printed in the terminal. See the [Skeleton Next.js installation guide](https://www.skeleton.dev/docs/svelte/get-started/installation/nextjs) for details and other themes.
+
 ## Start the development server
 
 Run:

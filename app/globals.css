@@ -1,4 +1,9 @@
 /* app/globals.css */
+@import 'tailwindcss';
+
+@import '@skeletonlabs/skeleton'; 
+@import '@skeletonlabs/skeleton-react'; 
+@import '@skeletonlabs/skeleton/themes/cerberus';
 
 * {
   box-sizing: border-box;
@@ -166,12 +171,13 @@ h1 {
   align-items: center;
   gap: 3px;
 
-  padding: 8px 4px;
+  min-width: 0;
+  padding: 8px 2px;
   border-radius: 14px;
 
   background: #e8e8e8;
   color: #171717;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   text-decoration: none;
 }
@@ -186,9 +192,54 @@ h1 {
   outline-offset: 2px;
 }
 
+.bottomNav button {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 2px;
+  border: 0;
+  border-radius: 14px;
+  background: #e8e8e8;
+  color: #171717;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bottomNav button:hover,
+.bottomNav button:focus-visible {
+  background: #f0f0f0;
+}
+
+.bottomNav button:focus-visible {
+  outline: 2px solid #171717;
+  outline-offset: 2px;
+}
+
 .bottomNav span {
   color: #171717;
   font-size: 22px;
+}
+
+.clerkAuthPage {
+  display: grid;
+  min-height: calc(100vh - 132px);
+  place-items: center;
+  padding: 24px 22px;
+}
+
+.bottomNavUser {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 2px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
