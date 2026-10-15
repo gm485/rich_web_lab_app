@@ -1,6 +1,12 @@
-// app/layout.tsx
-import "./globals.css";
+import type { Metadata } from "next";
+import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "Welcome to the app",
+  description: "Explore the app and manage your account.",
+};
 
 export default function RootLayout({
   children,
@@ -8,31 +14,52 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html data-theme="cerberus" lang="en">
       <body suppressHydrationWarning>
-        <main className="content">{children}</main>
+        <ClerkProvider>
+          <main className="content">{children}</main>
 
-        <nav className="bottomNav" aria-label="Primary navigation">
-          <Link href="/" aria-label="Home">
-            <span aria-hidden="true">⌂</span>
-            Home
-          </Link>
+          <nav className="bottomNav" aria-label="Primary navigation">
+            <Link href="/" aria-label="Home">
+              <span aria-hidden="true">⌂</span>
+              Home
+            </Link>
 
-          <Link href="/search" aria-label="Search">
-            <span aria-hidden="true">⌕</span>
-            Search
-          </Link>
+            <Link href="/search" aria-label="Search">
+              <span aria-hidden="true">⌕</span>
+              Search
+            </Link>
 
-          <Link href="/profile" aria-label="Profile">
-            <span aria-hidden="true">○</span>
-            Profile
-          </Link>
+            <Link href="/profile" aria-label="Profile">
+              <span aria-hidden="true">○</span>
+              Profile
+            </Link>
 
-          <Link href="/linus" aria-label="Learn about Linus Torvalds">
-            <span aria-hidden="true">ⓘ</span>
-            Linus
-          </Link>
-        </nav>
+            <Show when="signed-out">
+              <SignInButton mode="redirect">
+                <button className="authNavButton" type="button">
+                  Sign in
+                </button>
+              </SignInButton>
+              <SignUpButton mode="redirect">
+                <button className="authNavButton" type="button">
+                  Register
+                </button>
+              </SignUpButton>
+            </Show>
+
+            <Show when="signed-in">
+              <div className="bottomNavUser" aria-label="Account menu">
+                <UserButton />
+              </div>
+            </Show>
+
+            <Link href="/linus" aria-label="Learn about Linus Torvalds">
+              <span aria-hidden="true">ⓘ</span>
+              Linus
+            </Link>
+          </nav>
+        </ClerkProvider>
       </body>
     </html>
   );
