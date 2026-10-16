@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 //dashboard panel types
 type DashboardPanelProps = {
-    title: String;
+    title: string;
     children: ReactNode;
 }
 
