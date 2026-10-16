@@ -18,11 +18,15 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <ClerkProvider>
           <main className="content">{children}</main>
+          
 
           <nav className="bottomNav" aria-label="Primary navigation">
             <Link href="/" aria-label="Home">
               <span aria-hidden="true">⌂</span>
               Home
+            </Link>
+            <Link href="/dashboard">
+              Dashboard
             </Link>
 
             <Link href="/search" aria-label="Search">
@@ -58,6 +62,7 @@ export default function RootLayout({
               <span aria-hidden="true">ⓘ</span>
               Linus
             </Link>
+            
           </nav>
         </ClerkProvider>
       </body>

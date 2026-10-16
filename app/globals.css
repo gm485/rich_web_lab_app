@@ -1,9 +1,8 @@
 /* app/globals.css */
 @import 'tailwindcss';
 
-@import '@skeletonlabs/skeleton'; 
-@import '@skeletonlabs/skeleton-react'; 
-@import '@skeletonlabs/skeleton/themes/cerberus';
+@import '../node_modules/@skeletonlabs/skeleton/src/index.css';
+@import '../node_modules/@skeletonlabs/skeleton/src/themes/cerberus.css';
 
 * {
   box-sizing: border-box;
