@@ -49,6 +49,11 @@ submissions and pdfs located in [`/docs`](./docs) directory
 
 |Task 1: 29/9/2026| [`task1.pdf`](./docs/task1.pdf) Initial setup and codespace developement
 
+<<<<<<< HEAD
 |Task 2: 07/10/2026| [`task2.pdf`](./docs/task2.pdf) CDN setup and local public file management.
 
 -- To-do: encapsulate all variables pointing to outside sources for project
+=======
+
+|Task 2: 02/9/2026| [`task1.pdf`](./docs/task1.pdf) CDN setup and request testing 
+>>>>>>> aad418a (lab 1)
