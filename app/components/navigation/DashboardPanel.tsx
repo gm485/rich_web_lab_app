@@ -11,8 +11,8 @@ export default function DashboardPanel({
 }: DashboardPanelProps
 ) {
   return (
-    <div className="card w-full max-w-md preset-filled-surface-100-900 p-4 text-center">
-        <h2 className="p-5">{title}</h2>
+    <div className="w-full max-w-md rounded-xl border border-neutral-200 bg-white p-4 text-center text-neutral-900 shadow-sm">
+        <h2 className="p-5 text-xl font-semibold">{title}</h2>
         <div>{children}</div>
     </div>
   );

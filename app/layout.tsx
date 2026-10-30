@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html data-theme="cerberus" lang="en">
+    <html lang="en">
       <body suppressHydrationWarning>
         <ClerkProvider>
           <main className="content">{children}</main>
@@ -63,7 +64,23 @@ export default function RootLayout({
               Linus
             </Link>
             
+            <Link href="/hello" aria-label="Hello world">
+              <span aria-hidden="true">👋🏻</span>
+              Hello
+            </Link>
+
+            <Link href="/recipe" aria-label="Hello world">
+              <span aria-hidden="true">🍕</span>
+              Recipe
+            </Link>
+
+            <Link href="/products-test" aria-label="products page">
+              <span aria-hidden="true">🕵🏻‍♂️</span>
+              Products
+            </Link>
+            recipe
           </nav>
+          <Toaster position="bottom-right" richColors />
         </ClerkProvider>
       </body>
     </html>
