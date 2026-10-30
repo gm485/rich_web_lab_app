@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {auth} from '@clerk/nextjs/server'
-import { db, authenticate} from "@/lib/database";
+import {authenticate} from "@/lib/database";
 
 
 export async function GET(request: NextRequest) {
