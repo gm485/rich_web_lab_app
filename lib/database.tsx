@@ -6,7 +6,7 @@ import PocketBase from "pocketbase";
 const db = new PocketBase(process.env.POCKETBASE_URL!);
 
 
-async function authenticate() {
+export async function authenticate() {
 
   await db.collection("_superusers").authWithPassword(
 
@@ -16,7 +16,6 @@ async function authenticate() {
 
   );
 
+  return db;
 }
 
-
-export { db, authenticate };
