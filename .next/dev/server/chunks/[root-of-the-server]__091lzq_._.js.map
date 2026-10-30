@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 112, "column": 0}, "map": {"version":3,"sources":["file:///home/gm485/rich_web_labs/rich_web_lab_app/proxy.ts"],"sourcesContent":["import { clerkMiddleware } from \"@clerk/nextjs/server\";\n\nexport default clerkMiddleware();\n\nexport const config = {\n  matcher: [\n    // Skip Next.js internals and static files, unless found in search params.\n    \"/((?!_next|[^?]*\\\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)\",\n    // Always run for API routes and Clerk's frontend API routes.\n    \"/(api|trpc)(.*)\",\n    \"/__clerk/(.*)\",\n  ],\n};\n"],"names":["config","matcher"],"mappings":";;;;;;AAAA;;uCAEe,IAAA,gMAAe;AAEvB,MAAMA,SAAS;IACpBC,SAAS;QACP,0EAA0E;QAC1E;QACA,6DAA6D;QAC7D;QACA;KACD;AACH"}}]
+}
