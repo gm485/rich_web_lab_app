@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { db, authenticate} from "@/lib/database";
 
 
-export async function GET(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     await authenticate();
-    const { searchParams } = new URL(request.url);
+    const { searchParams} = new URL(request.url);
      // Extract the variables
     const name = searchParams.get("name");
     const description = searchParams.get("description");
