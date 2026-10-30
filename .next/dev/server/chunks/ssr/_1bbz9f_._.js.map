@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 17, "column": 0}, "map": {"version":3,"sources":["file:///home/gm485/rich_web_labs/rich_web_lab_app/.next-internal/server/app/_not-found/page/actions.js%20(server%20actions%20loader)"],"sourcesContent":["export {deleteKeylessAction as '00151a2396433613f39e2007b52f76266bb2831e6d'} from 'ACTIONS_MODULE0'\nexport {invalidateCacheAction as '00d156b8ac5e1c7e80492c28d9d3de38c6fe1dd321'} from 'ACTIONS_MODULE1'\n"],"names":[],"mappings":";AAAA;AACA"}},
-    {"offset": {"line": 26, "column": 0}, "map": {"version":3,"sources":["file:///home/gm485/rich_web_labs/rich_web_lab_app/node_modules/@clerk/nextjs/dist/esm/app-router/server-actions.js"],"sourcesContent":["\"use server\";\nimport { cookies } from \"next/headers\";\nasync function invalidateCacheAction() {\n  void (await cookies()).delete(`__clerk_invalidate_cache_cookie_${Date.now()}`);\n}\nexport {\n  invalidateCacheAction\n};\n"],"names":["invalidateCacheAction","delete","Date","now"],"mappings":";;;;;AACA;;;;AACA,eAAeA;IACb,KAAK,CAAC,MAAM,IAAA,0IAAO,GAAE,EAAEC,MAAM,CAAC,CAAC,gCAAgC,EAAEC,KAAKC,GAAG,IAAI;AAC/E;;;;IAFeH;;AAAAA,+OAAAA","ignoreList":[0]}}]
-}

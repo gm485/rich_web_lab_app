@@ -69,11 +69,6 @@ export default function RootLayout({
               Hello
             </Link>
 
-            <Link href="/recipe" aria-label="Hello world">
-              <span aria-hidden="true">🍕</span>
-              Recipe
-            </Link>
-
             <Link href="/products-test" aria-label="products page">
               <span aria-hidden="true">🕵🏻‍♂️</span>
               Products

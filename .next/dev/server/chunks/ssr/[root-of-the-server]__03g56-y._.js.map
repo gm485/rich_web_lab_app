@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 13, "column": 0}, "map": {"version":3,"sources":["file:///home/gm485/rich_web_labs/rich_web_lab_app/app/favicon.ico.mjs%20(structured%20image%20object)"],"sourcesContent":["import src from \"IMAGE\";\nexport default { src, width: 256, height: 256 }\n"],"names":["src","width","height"],"mappings":";;;;AAAA;;uCACe;IAAEA,KAAAA,mIAAG;IAAEC,OAAO;IAAKC,QAAQ;AAAI"}},
-    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///home/gm485/rich_web_labs/rich_web_lab_app/app/profile/page.tsx"],"sourcesContent":["// app/page.tsx\nexport default function Home() {\n  return (\n    <section className=\"page\">\n      <p className=\"eyebrow\"></p>\n      <h1>Home</h1>\n      <p className=\"description\">\n        \n      </p>\n\n      <div className=\"card\">\n        <h2>Profile</h2>\n        <p>Welcome to the app.</p>\n      </div>\n      \n      \n       <div className=\"card\">\n        <h2>Hmmm</h2>\n        <p>We should probably login.</p>\n      </div>\n      \n    </section>\n  );\n}\n"],"names":["Home","className"],"mappings":"AAAA,eAAe;;;;;;;AACA,SAASA;IACtB,qBACE,8OAAC;QAAQC,WAAU;;0BACjB,8OAAC;gBAAEA,WAAU;;;;;;0BACb,8OAAC;0BAAG;;;;;;0BACJ,8OAAC;gBAAEA,WAAU;;;;;;0BAIb,8OAAC;gBAAIA,WAAU;;kCACb,8OAAC;kCAAG;;;;;;kCACJ,8OAAC;kCAAE;;;;;;;;;;;;0BAIJ,8OAAC;gBAAIA,WAAU;;kCACd,8OAAC;kCAAG;;;;;;kCACJ,8OAAC;kCAAE;;;;;;;;;;;;;;;;;;AAKX"}}]
-}
