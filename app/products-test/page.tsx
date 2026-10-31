@@ -1,8 +1,9 @@
-import {createProduct, deleteProduct, getProducts} from '@/lib/actions'
+import { createProduct, deleteProduct, getProducts, editProduct } from '@/lib/actions'
 import { Card, CardContent } from '@/components/ui/card';
 import ProductsFormToggle from './components/ProductsFormToggle'
+import ProductEditForm from './components/ProductEditForm';
 import { Trash } from 'lucide-react';
-import type {LucideProps} from 'lucide-react/types'
+
 
 export default async function ProductsTest() {
     const products = await getProducts();
@@ -14,7 +15,7 @@ export default async function ProductsTest() {
                 <ProductsFormToggle createProductAction={createProduct} />
             </div>
             <ul>
-                {products?.map(({id, Name, description,price }) =>
+                {products?.map(({id, Name, description, price }) =>
                 
                 <Card className="m-5 flex" key={id}>
                     <CardContent className="m-2">
@@ -23,11 +24,19 @@ export default async function ProductsTest() {
                         <p>{description}</p>
                         <p>€ {price}</p>
                     </li>
-
-                    <form action={deleteProduct}>
-                        <input type="hidden" name='id' value={id} />
-                        <button type="submit"><Trash/></button>
-                    </form>
+                    <div className="flex gap-5">
+                        <form action={deleteProduct}>
+                            <input type="hidden" name='id' value={id} />
+                            <button type="submit" aria-label={`Delete ${Name}`}><Trash/></button>
+                        </form>
+                    </div>
+                    <ProductEditForm
+                        id={id}
+                        name={Name}
+                        description={description}
+                        price={price}
+                        editProductAction={editProduct}
+                    />
                     </CardContent>
                 </Card>
             )}
