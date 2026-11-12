@@ -39,6 +39,15 @@ export async function getProducts(){
   });
 }
 
+export async function refreshProducts() {
+  "use server";
+
+  const { userId } = await auth();
+  if (!userId) throw new Error("You must be logged in to view products.");
+
+  revalidatePath("/products-test");
+}
+
 export async function createProduct(formData: FormData) {
   'use server'
 

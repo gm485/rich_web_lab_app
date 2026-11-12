@@ -165,6 +165,135 @@ h1 {
   border-color: #999;
 }
 
+.productsLayout,
+.productsPage {
+  width: 100%;
+  max-width: 1100px;
+}
+
+.productsHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e1e4e9;
+}
+
+.productsHeader .eyebrow {
+  margin-bottom: 7px;
+}
+
+.productsHeader h1 {
+  font-size: 32px;
+}
+
+.productsActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.productsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.productsListItem {
+  min-width: 0;
+}
+
+.productsEmptyListItem {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+}
+
+.productCard {
+  height: 100%;
+  background: #fff;
+  box-shadow: 0 5px 18px rgba(30, 38, 52, 0.05);
+}
+
+.productCard [data-slot="card-content"] {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+}
+
+.productDetails h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.productDetails p {
+  margin: 4px 0;
+  color: #657083;
+  line-height: 1.5;
+}
+
+.productItemActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.productsEmptyState {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  width: min(100%, 28rem);
+  margin: 0;
+  color: #657083;
+  text-align: center;
+}
+
+.productsEmptyState > section {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.productsEmptyState p {
+  margin: 0;
+}
+
+.productsWorkspace {
+  width: 100%;
+}
+
+.productsFormView {
+  display: grid;
+  width: 100%;
+  justify-items: center;
+}
+
+@media (max-width: 640px) {
+  .productsHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .productsActions {
+    width: 100%;
+  }
+
+  .productsActions > form,
+  .productsActions > form button {
+    width: 100%;
+  }
+}
+
 .siteHeader {
   position: sticky;
   z-index: 110;

@@ -27,8 +27,10 @@ import {
 
 export default function ProductsForm({
   createProductAction,
+  onCreated,
 }: {
   createProductAction: (formData: FormData) => Promise<void>;
+  onCreated?: () => void;
 }) {
   const form = useForm({
     defaultValues: {
@@ -48,6 +50,7 @@ export default function ProductsForm({
       await createProductAction(formData);
       toast.success("Product created");
       form.reset();
+      onCreated?.();
     } catch {
       toast.error("Could not create product");
     }
@@ -146,7 +149,7 @@ export default function ProductsForm({
             Reset
           </Button>
           <Button type="submit" form="form-rhf-demo">
-            Submit
+            Create product
           </Button>
         </Field>
       </CardFooter>

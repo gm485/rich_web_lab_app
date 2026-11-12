@@ -3,6 +3,7 @@
 import { useTransition, type FormEvent } from "react";
 import { Trash } from "lucide-react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 export default function ProductDeleteForm({
   id,
@@ -32,14 +33,16 @@ export default function ProductDeleteForm({
   return (
     <form onSubmit={handleSubmit}>
       <input type="hidden" name="id" value={id} />
-      <button
+      <Button
         type="submit"
+        size="icon"
+        variant="destructive"
         aria-label={`Delete ${name}`}
         disabled={isPending}
         aria-busy={isPending}
       >
         <Trash aria-hidden="true" />
-      </button>
+      </Button>
     </form>
   );
 }
