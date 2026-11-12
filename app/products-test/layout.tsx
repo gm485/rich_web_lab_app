@@ -1,4 +1,4 @@
-import { createProduct, refreshProducts } from "@/lib/actions";
+import { createProduct } from "@/lib/actions";
 import ProductsPageShell from "./ProductsPageShell";
 
 export default async function ProductsLayout({
@@ -7,7 +7,6 @@ export default async function ProductsLayout({
   return (
     <ProductsPageShell
       createProductAction={createProduct}
-      refreshProductsAction={refreshProducts}
     >
       {children}
     </ProductsPageShell>

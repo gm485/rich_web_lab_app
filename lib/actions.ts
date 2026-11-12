@@ -1,7 +1,8 @@
 import {authenticate} from '@/lib/database'
 import { auth } from '@clerk/nextjs/server';
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
+import { ClientResponseError } from 'pocketbase';
 
 export async function createPost(formData: FormData) {
 
@@ -38,6 +39,21 @@ export async function getProducts(){
   return db.collection('Products').getFullList({
     sort: '-created',
   });
+}
+
+export async function getProduct(id: string) {
+  const {userId} = await auth();
+
+  if (!userId) redirect('/sign-in');
+
+  const db = await authenticate();
+
+  try {
+    return await db.collection('Products').getOne(id);
+  } catch (error) {
+    if (error instanceof ClientResponseError && error.status === 404) notFound();
+    throw error;
+  }
 }
 
 export async function refreshProducts() {
@@ -94,6 +110,7 @@ export async function deleteProduct(formData: FormData) {
 
   await db.collection("Products").delete(id);
   revalidatePath("/products-test");
+  revalidatePath(`/products-test/${id}`);
 }
 
 export async function editProduct(formData: FormData) {
@@ -120,4 +137,5 @@ export async function editProduct(formData: FormData) {
 
   await db.collection("Products").update(id, { Name: name, description, price });
   revalidatePath("/products-test");
+  revalidatePath(`/products-test/${id}`);
 }

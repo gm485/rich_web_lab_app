@@ -10,6 +10,7 @@ import {
 } from "react";
 import { Button } from "@/components/ui/button";
 import ProductsForm from "./components/ProductsForm";
+import ProductsBackLink from "./components/ProductsBackLink";
 
 const ProductsViewContext = createContext<((isEmpty: boolean) => void) | null>(null);
 
@@ -32,18 +33,15 @@ export function ProductsViewState({
 export default function ProductsPageShell({
   children,
   createProductAction,
-  refreshProductsAction,
 }: {
   children: ReactNode;
   createProductAction: (formData: FormData) => Promise<void>;
-  refreshProductsAction: () => Promise<void>;
 }) {
   const [isEmpty, setIsEmpty] = useState(false);
   const [showCreateForm, setShowCreateForm] = useState(false);
 
   const onEmptyChange = useCallback((empty: boolean) => {
     setIsEmpty(empty);
-    if (empty) setShowCreateForm(true);
   }, []);
 
   return (
@@ -54,25 +52,36 @@ export default function ProductsPageShell({
           <h1>Products</h1>
         </div>
         <div className="productsActions" role="group" aria-label="Product actions">
-          <form action={refreshProductsAction}>
-            <Button type="submit" variant="outline">Get all products</Button>
-          </form>
-          {!isEmpty && (
-            <Button
-              type="button"
-              variant="outline"
-              aria-expanded={showCreateForm}
-              onClick={() => setShowCreateForm((show) => !show)}
-            >
-              {showCreateForm ? "View products" : "Add product"}
-            </Button>
-          )}
+          <ProductsBackLink
+            href="/products-test"
+            onClick={() => setShowCreateForm(false)}
+          >
+            All products
+          </ProductsBackLink>
+          <Button
+            type="button"
+            variant="outline"
+            size="lg"
+            aria-expanded={showCreateForm}
+            onClick={() => setShowCreateForm((show) => !show)}
+          >
+            {showCreateForm ? "View products" : isEmpty ? "Add first product" : "Add product"}
+          </Button>
         </div>
       </header>
       <ProductsViewContext.Provider value={onEmptyChange}>
         <section className="productsWorkspace" aria-label="Products workspace">
           {showCreateForm ? (
             <div className="productsFormView">
+              <Button
+                className="productsFormBack"
+                type="button"
+                variant="outline"
+                size="lg"
+                onClick={() => setShowCreateForm(false)}
+              >
+                Back to products
+              </Button>
               <ProductsForm
                 createProductAction={createProductAction}
                 onCreated={() => setShowCreateForm(false)}

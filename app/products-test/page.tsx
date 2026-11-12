@@ -1,6 +1,6 @@
-import { deleteProduct, getProducts, editProduct } from '@/lib/actions'
+import { deleteProduct, getProducts } from '@/lib/actions'
+import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
-import ProductEditForm from './components/ProductEditForm';
 import ProductDeleteForm from './components/ProductDeleteForm';
 import { ProductsViewState } from './ProductsPageShell';
 
@@ -23,19 +23,15 @@ export default async function ProductsTest() {
                     <li className="productsListItem" key={id}>
                         <Card className="productCard">
                             <CardContent>
-                                <div className="productDetails">
-                                    <h2>{Name}</h2>
-                                    <p>{description}</p>
-                                    <p>€ {price}</p>
-                                </div>
+                                <Link className="productDetailsLink" href={`/products-test/${id}`}>
+                                    <div className="productDetails">
+                                        <h2>{Name}</h2>
+                                        <p>{description}</p>
+                                        <p>€ {price}</p>
+                                        <span className="productOpenHint">View product details →</span>
+                                    </div>
+                                </Link>
                                 <div className="productItemActions">
-                                    <ProductEditForm
-                                        id={id}
-                                        name={Name}
-                                        description={description}
-                                        price={price}
-                                        editProductAction={editProduct}
-                                    />
                                     <ProductDeleteForm
                                         id={id}
                                         name={Name}

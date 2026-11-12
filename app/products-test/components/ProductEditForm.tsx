@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { Pen } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { type FormEvent, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
 export default function ProductEditForm({
@@ -12,14 +13,16 @@ export default function ProductEditForm({
   description,
   price,
   editProductAction,
+  returnTo,
 }: {
   id: string;
   name: string;
   description: string;
   price: number;
   editProductAction: (formData: FormData) => Promise<void>;
+  returnTo: string;
 }) {
-  const [showForm, setShowForm] = useState(false);
+  const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -29,7 +32,7 @@ export default function ProductEditForm({
     try {
       await editProductAction(new FormData(event.currentTarget));
       toast.success("Product updated");
-      setShowForm(false);
+      router.push(returnTo);
     } catch {
       toast.error("Could not update product");
     } finally {
@@ -38,53 +41,49 @@ export default function ProductEditForm({
   }
 
   return (
-    <div className="mt-2">
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon"
-        aria-label={`Edit ${name}`}
-        aria-expanded={showForm}
-        onClick={() => setShowForm((visible) => !visible)}
-      >
-        <Pen aria-hidden="true" />
-      </Button>
-
-      {showForm && (
-        <form onSubmit={handleSubmit} className="mt-3 grid gap-2">
-          <input type="hidden" name="id" value={id} />
-          <Input name="name" aria-label="Product name" defaultValue={name} required />
+    <form onSubmit={handleSubmit} className="w-full">
+      <input type="hidden" name="id" value={id} />
+      <FieldGroup className="mx-auto w-full max-w-md gap-6">
+        <Field>
+          <FieldLabel htmlFor="product-name">Name</FieldLabel>
+          <Input id="product-name" name="name" defaultValue={name} required />
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="product-description">Description</FieldLabel>
           <Input
+            id="product-description"
             name="description"
-            aria-label="Product description"
             defaultValue={description}
             required
           />
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="product-price">Price</FieldLabel>
           <Input
+            id="product-price"
             name="price"
-            aria-label="Product price"
             type="number"
             min="0"
             step="0.01"
             defaultValue={price}
             required
           />
-          <div className="flex gap-2">
-            <Button type="submit" size="sm" disabled={isSaving}>
-              {isSaving ? "Saving…" : "Save changes"}
-            </Button>
-            <Button
-              type="button"
-              size="sm"
-              variant="outline"
-              disabled={isSaving}
-              onClick={() => setShowForm(false)}
-            >
-              Cancel
-            </Button>
-          </div>
-        </form>
-      )}
-    </div>
+        </Field>
+      </FieldGroup>
+      <Field orientation="horizontal" className="mx-auto mb-6 mt-6 w-full max-w-md justify-center">
+        <Button type="submit" size="lg" disabled={isSaving}>
+          {isSaving ? "Saving…" : "Save changes"}
+        </Button>
+        <Button
+          type="button"
+          variant="outline"
+          size="lg"
+          disabled={isSaving}
+          onClick={() => router.push(returnTo)}
+        >
+          Cancel
+        </Button>
+      </Field>
+    </form>
   );
 }

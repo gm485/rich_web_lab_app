@@ -145,10 +145,10 @@ export default function ProductsForm({
       </CardContent>
       <CardFooter>
         <Field orientation="horizontal">
-          <Button type="button" variant="outline" onClick={() => form.reset()}>
+          <Button type="button" variant="outline" size="lg" onClick={() => form.reset()}>
             Reset
           </Button>
-          <Button type="submit" form="form-rhf-demo">
+          <Button type="submit" size="lg" form="form-rhf-demo">
             Create product
           </Button>
         </Field>

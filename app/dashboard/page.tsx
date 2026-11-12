@@ -1,5 +1,4 @@
 import { auth } from "@clerk/nextjs/server";
-import { useUser } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs/server";
 
 import DashboardPanel from '../components/navigation/DashboardPanel'
@@ -19,14 +18,17 @@ export default async function DashboardPage() {
 
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <p>Logged in as: {userId}</p>
+    <section className="dashboardPage" aria-labelledby="dashboard-title">
+      <p className="eyebrow">YOUR WORKSPACE</p>
+      <h1 id="dashboard-title">Dashboard</h1>
+      <p className="description">A quick overview of your account.</p>
 
-      {user && surName && <p>Welcome, {name} {surName}!</p>}
-
-      <DashboardPanel title={surName}> </DashboardPanel>
-      
-    </div>
+      <DashboardPanel title={`Welcome, ${name} ${surName}`}>
+        <p>You are signed in and ready to use the app.</p>
+        <p className="dashboardIdentity">
+          Account ID <code>{userId}</code>
+        </p>
+      </DashboardPanel>
+    </section>
   );
 }

@@ -16,18 +16,22 @@ export default function Home() {
         <p>Welcome to the app.</p>
       </div>
 
-      <Image 
-        src="https://tudublin12.b-cdn.net/tux.png"
-        alt="Hero Image"
-        width={200}
-        height={200}
-      />
-      <Image
-        src="/beastie.png"
-        alt="Hero Image 2"
-        width={200}
-        height={200}
-      />
+      <div className="homeImageRow" aria-label="Open-source mascots">
+        <Image
+          className="homeImage"
+          src="https://tudublin12.b-cdn.net/tux.png"
+          alt="Tux, the Linux penguin"
+          width={200}
+          height={200}
+        />
+        <Image
+          className="homeImage"
+          src="/beastie.png"
+          alt="Beastie, the BSD mascot"
+          width={200}
+          height={200}
+        />
+      </div>
      
 
     </section>
