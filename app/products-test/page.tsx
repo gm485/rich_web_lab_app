@@ -2,7 +2,7 @@ import { createProduct, deleteProduct, getProducts, editProduct } from '@/lib/ac
 import { Card, CardContent } from '@/components/ui/card';
 import ProductsFormToggle from './components/ProductsFormToggle'
 import ProductEditForm from './components/ProductEditForm';
-import { Trash } from 'lucide-react';
+import ProductDeleteForm from './components/ProductDeleteForm';
 
 
 export default async function ProductsTest() {
@@ -10,7 +10,7 @@ export default async function ProductsTest() {
 
 
     return (
-        <main className="flex gap-5">
+        <main className="flex flex-col gap-5 sm:flex-row">
             <div>
                 <ProductsFormToggle createProductAction={createProduct} />
             </div>
@@ -25,10 +25,11 @@ export default async function ProductsTest() {
                         <p>€ {price}</p>
                     </li>
                     <div className="flex gap-5">
-                        <form action={deleteProduct}>
-                            <input type="hidden" name='id' value={id} />
-                            <button type="submit" aria-label={`Delete ${Name}`}><Trash/></button>
-                        </form>
+                        <ProductDeleteForm
+                            id={id}
+                            name={Name}
+                            deleteProductAction={deleteProduct}
+                        />
                     </div>
                     <ProductEditForm
                         id={id}

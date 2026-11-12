@@ -18,9 +18,8 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning>
         <ClerkProvider>
-          <main className="content">{children}</main>
           <Navbar />
-          
+          <main className="content">{children}</main>
           <Toaster position="bottom-right" richColors />
         </ClerkProvider>
       </body>

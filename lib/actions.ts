@@ -1,6 +1,5 @@
 import {authenticate} from '@/lib/database'
 import { auth } from '@clerk/nextjs/server';
-import { pbkdf2 } from 'crypto';
 import { revalidatePath } from 'next/cache';
 
 export async function createPost(formData: FormData) {
@@ -37,7 +36,6 @@ export async function getProducts(){
 
   return db.collection('Products').getFullList({
     sort: '-created',
-    filter: db.filter('clerkUserId = {:userId}', { userId }),
   });
 }
 
@@ -89,10 +87,9 @@ export async function deleteProduct(formData: FormData) {
 }
 
 export async function editProduct(formData: FormData) {
-  "use server";
-
+  "use server"
   const { userId } = await auth();
-  if (!userId) throw new Error("You must be logged in to edit a product.");
+  if (!userId) throw new Error("Unauthorized, please log in");
 
   const idValue = formData.get("id");
   const id = typeof idValue === "string" ? idValue.trim() : "";
@@ -101,23 +98,16 @@ export async function editProduct(formData: FormData) {
   const priceValue = String(formData.get("price") ?? "").trim();
   const price = Number(priceValue);
 
-  if (!id) throw new Error("Product ID is required.");
-  if (!name || !description || !priceValue || !Number.isFinite(price) || price < 0) {
-    throw new Error("Enter a name, description, and valid non-negative price.");
+  if (!id || !name || !description || !priceValue || !Number.isFinite(price) || price < 0) {
+    throw new Error("Enter a product ID, name, description, and valid non-negative price");
   }
 
   const db = await authenticate();
   const product = await db.collection("Products").getOne(id);
-
   if (product.clerkUserId !== userId) {
     throw new Error("You are not allowed to edit this product.");
   }
 
-  await db.collection("Products").update(id, {
-    Name: name,
-    description,
-    price,
-  });
-
+  await db.collection("Products").update(id, { Name: name, description, price });
   revalidatePath("/products-test");
 }

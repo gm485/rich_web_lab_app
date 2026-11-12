@@ -1,63 +1,92 @@
-import Link from "next/link"
-import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
-import { Show } from "@clerk/nextjs"
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { Menu, X } from "lucide-react";
+
+const pages = [
+  { href: "/", label: "Home" },
+  { href: "/dashboard", label: "Dashboard" },
+  { href: "/products-test", label: "Products" },
+  { href: "/search", label: "Search" },
+  { href: "/about", label: "About" },
+  { href: "/linus", label: "Linus" },
+];
+
 export default function Navbar() {
-    return (
-        <>
-        <nav className="bottomNav" aria-label="Primary navigation">
-                <Link href="/" aria-label="Home">
-                <span aria-hidden="true">⌂</span>
-                Home
-                </Link>
-                <Link href="/dashboard">
-                Dashboard
-                </Link>
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-                <Link href="/search" aria-label="Search">
-                <span aria-hidden="true">⌕</span>
-                Search
-                </Link>
+  return (
+    <header className="siteHeader">
+      <div className="siteHeaderInner">
+        <Link className="siteBrand" href="/" onClick={() => setMenuOpen(false)}>
+          Demo<span>App</span>
+        </Link>
 
-                <Link href="/profile" aria-label="Profile">
-                <span aria-hidden="true">○</span>
-                Profile
-                </Link>
+        <button
+          className="mobileMenuButton"
+          type="button"
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
+          aria-controls="site-navigation"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? <X size={21} /> : <Menu size={21} />}
+        </button>
 
-                <Show when="signed-out">
+        <div id="site-navigation" className={`siteHeaderContent${menuOpen ? " isOpen" : ""}`}>
+          <nav className="sitePageLinks" aria-label="Pages">
+            {pages.map(({ href, label }) => {
+              const active = href === "/" ? pathname === href : pathname.startsWith(href);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={active ? "siteNavLink active" : "siteNavLink"}
+                  aria-current={active ? "page" : undefined}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {label}
+                </Link>
+              );
+            })}
+            <Link
+              href="/profile"
+              className={pathname.startsWith("/profile") ? "siteNavLink active" : "siteNavLink"}
+              aria-current={pathname.startsWith("/profile") ? "page" : undefined}
+              onClick={() => setMenuOpen(false)}
+            >
+              Profile
+            </Link>
+          </nav>
+
+          <div className="siteAccountArea" aria-label="Account">
+            <Show when="signed-out">
+              <div className="signedOutActions">
                 <SignInButton mode="redirect">
-                    <button className="authNavButton" type="button">
+                  <button className="accountLoginButton" type="button" onClick={() => setMenuOpen(false)}>
                     Sign in
-                    </button>
+                  </button>
                 </SignInButton>
                 <SignUpButton mode="redirect">
-                    <button className="authNavButton" type="button">
-                    Register
-                    </button>
+                  <button className="accountRegisterButton" type="button" onClick={() => setMenuOpen(false)}>
+                    Create account
+                  </button>
                 </SignUpButton>
-                </Show>
-
-                <Show when="signed-in">
-                <div className="bottomNavUser" aria-label="Account menu">
-                    <UserButton />
-                </div>
-                </Show>
-
-                <Link href="/linus" aria-label="Learn about Linus Torvalds">
-                <span aria-hidden="true">ⓘ</span>
-                Linus
-                </Link>
-                
-                <Link href="/hello" aria-label="Hello world">
-                <span aria-hidden="true">👋🏻</span>
-                Hello
-                </Link>
-
-                <Link href="/products-test" aria-label="products page">
-                <span aria-hidden="true">🕵🏻‍♂️</span>
-                Products
-                </Link>
-                recipe
-            </nav>
-          </>
-    )
+              </div>
+            </Show>
+            <Show when="signed-in">
+              <div className="signedInActions">
+                <span className="accountLabel">Your account</span>
+                <UserButton />
+              </div>
+            </Show>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 }
