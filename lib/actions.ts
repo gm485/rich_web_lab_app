@@ -1,6 +1,7 @@
 import {authenticate} from '@/lib/database'
 import { auth } from '@clerk/nextjs/server';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export async function createPost(formData: FormData) {
 
@@ -30,7 +31,7 @@ export async function deletePost(formData: FormData) {
 export async function getProducts(){
   const {userId} = await auth();
 
-  if (!userId) throw new Error("Unauthorized");
+  if (!userId) redirect('/sign-in');
 
   const db = await authenticate();
 
