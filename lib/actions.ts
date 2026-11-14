@@ -3,6 +3,9 @@ import { auth } from '@clerk/nextjs/server';
 import { revalidatePath } from 'next/cache';
 import { notFound, redirect } from 'next/navigation';
 import { ClientResponseError } from 'pocketbase';
+import { randomUUID } from "node:crypto";
+import { deleteBunnyFile, uploadBunnyFile } from "@/lib/bunny-storage";
+import { productSchema } from "@/lib/validations/product";
 
 export async function createPost(formData: FormData) {
 
@@ -71,22 +74,51 @@ export async function createProduct(formData: FormData) {
   const { userId } = await auth();
   if (!userId) throw new Error("You must be logged in to create a product");
 
-  const name = String(formData.get("name") ?? "").trim();
-  const description = String(formData.get("description") ?? "").trim();
-  const priceValue = String(formData.get("price") ?? "").trim();
-  const price = Number(priceValue);
-
-  if (!name || !description || !priceValue || !Number.isFinite(price) || price < 0) {
-    throw new Error("Enter a name, description, and valid non-negative price");
+  const submittedImage = formData.get("image");
+  if (submittedImage !== null && !(submittedImage instanceof File)) {
+    throw new Error("Invalid image upload");
   }
 
-  const db = await authenticate();
-  await db.collection("Products").create({
-    Name: name,
-    description,
-    price,
-    clerkUserId: userId,
+  const parsed = productSchema.safeParse({
+    name: formData.get("name"),
+    description: formData.get("description"),
+    price: formData.get("price"),
+    image: submittedImage,
   });
+
+  if (!parsed.success) {
+    throw new Error(parsed.error.issues[0]?.message ?? "Invalid product details");
+  }
+
+  const { name, description, price, image } = parsed.data;
+  const extensionByType: Record<string, string> = {
+    "image/jpeg": "jpg",
+    "image/png": "png",
+    "image/webp": "webp",
+  };
+  let imagePath: string | null = null;
+
+  try {
+    let imageUrl = "";
+    if (image) {
+      imagePath = `/products/${userId}/${randomUUID()}.${extensionByType[image.type]}`;
+      imageUrl = await uploadBunnyFile(image, imagePath);
+    }
+
+    const db = await authenticate();
+    await db.collection("Products").create({
+      Name: name,
+      description,
+      price: Number(price),
+      clerkUserId: userId,
+      imageUrl,
+    });
+  } catch (error) {
+    if (imagePath) {
+      await deleteBunnyFile(imagePath).catch(() => undefined);
+    }
+    throw error;
+  }
 
   revalidatePath("/products-test");
 }

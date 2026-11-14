@@ -16,17 +16,13 @@ npm install
 
 ## Configure environment variables
 
-Create `.env.local` in the project root and set the following variables. Use credentials from your own Clerk and PocketBase projects; do not commit this file.
+Copy `.env.example` to `.env.local` in the project root and fill in the values from your Clerk, PocketBase, and Bunny.net accounts. Do not commit `.env.local`.
 
-```dotenv
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-POCKETBASE_URL=
-POCKETBASE_SUPERUSER_EMAIL=
-POCKETBASE_SUPERUSER_PASSWORD=
+```bash
+cp .env.example .env.local
 ```
 
-The PocketBase superuser credentials are used by server-side code. Keep them private and do not add a `NEXT_PUBLIC_` prefix.
+The PocketBase superuser credentials and Bunny Storage password are used by server-side code. Keep them private and do not add a `NEXT_PUBLIC_` prefix.
 
 ## Start the development server
 
@@ -47,6 +43,10 @@ npm run lint   # Check the code with ESLint
 npm run build  # Build the app for production
 npm start      # Start the production build (run npm run build first)
 ```
+
+## TODO
+
+- Add tests for the product image dropzone: choosing or dropping an image, rejecting non-image files, showing the preview, and clearing the selection after reset or successful submission.
 
 ## Main pages
 
